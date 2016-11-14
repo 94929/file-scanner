@@ -2,6 +2,7 @@ import java.io.*;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
@@ -34,9 +35,10 @@ public class FileScanner {
 
         try {
             BufferedReader br =
-                    new BufferedReader(new FileReader(file.getName()));
+                    new BufferedReader(new FileReader(file.getAbsolutePath()));
             String line;
-            while ((line = br.readLine()) != null) evaluate(line);
+            while ((line = br.readLine()) != null)
+                evaluate(line);
         } catch (Exception e) {
             e.getStackTrace();
         }
@@ -55,7 +57,7 @@ public class FileScanner {
         return sb.toString();
     }
 
-    /* Should only initialise emails */
+    /* Takes a string line, evaluate if the line contains any valid emails. */
     public void evaluate(String line) {
         StringTokenizer st = new StringTokenizer(line);
         while (st.hasMoreTokens()) {
@@ -66,10 +68,12 @@ public class FileScanner {
     }
 
     public boolean isValidEmail(String email) {
-        String emailPattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+" +
-                "@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\." +
-                "[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
-
-        return Pattern.compile(emailPattern).matcher(email).matches();
+        String ePattern =
+                "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\." +
+                        "[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|" +
+                        "(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
+        Pattern p = java.util.regex.Pattern.compile(ePattern);
+        Matcher m = p.matcher(email);
+        return m.matches();
     }
 }
