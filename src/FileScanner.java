@@ -40,7 +40,7 @@ public class FileScanner {
             while ((line = br.readLine()) != null)
                 evaluate(line);
         } catch (Exception e) {
-            e.getStackTrace();
+            System.out.println(e.getStackTrace());
         }
 
         // filePath, fileName, numOfEmails, emails
