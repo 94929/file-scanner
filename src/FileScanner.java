@@ -42,7 +42,7 @@ public class FileScanner {
         }
 
         // filePath, fileName, numOfEmails, emails
-        System.out.println(file.getAbsolutePath()+" "+ file.getName()+" "+
+        System.out.println(file.getParentFile()+" "+ file.getName()+" "+
                 emails.size()+" "+getEmails(emails));
     }
 

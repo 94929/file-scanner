@@ -9,6 +9,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         FileScanner fs = new FileScanner();
 
+        // Takes an input of the 'root' path
         fs.scan(sc.nextLine());
     }
 }
