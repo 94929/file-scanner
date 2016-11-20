@@ -10,9 +10,11 @@ import java.util.regex.Pattern;
 
 public class FileScanner {
     private List<String> emails;
+    private String extension;
 
-    public FileScanner() {
-        emails = new ArrayList<>();
+    public FileScanner(String extension) {
+        this.emails = new ArrayList<>();
+        this.extension = extension;
     }
 
     public void scan(String path) {
@@ -24,7 +26,7 @@ public class FileScanner {
             if (file.isDirectory())
                 traverse(file.listFiles());
             if (file.getName().substring(file.getName().lastIndexOf(".") + 1).
-                    equals("txt"))
+                    equals(extension))
                 printData(file);
         }
     }
