@@ -2,7 +2,6 @@ import java.io.*;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
@@ -40,7 +39,7 @@ public class FileScanner {
             while ((line = br.readLine()) != null)
                 evaluate(line);
         } catch (Exception e) {
-            System.out.println(e.getStackTrace());
+            e.printStackTrace();
         }
 
         // filePath, fileName, numOfEmails, emails
@@ -68,12 +67,11 @@ public class FileScanner {
     }
 
     public boolean isValidEmail(String email) {
-        String ePattern =
+        String emailPattern =
                 "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\." +
                         "[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|" +
                         "(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
-        Pattern p = java.util.regex.Pattern.compile(ePattern);
-        Matcher m = p.matcher(email);
-        return m.matches();
+
+        return Pattern.compile(emailPattern).matcher(email).matches();
     }
 }

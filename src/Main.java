@@ -1,4 +1,3 @@
-import java.util.Scanner;
 
 /**
  * Created by jsh3571 on 06/11/2016.
@@ -6,10 +5,10 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+        String path = System.getProperty("user.dir");
         FileScanner fs = new FileScanner();
 
         // Takes an input of the 'root' path
-        fs.scan(sc.nextLine());
+        fs.scan(path);
     }
 }
